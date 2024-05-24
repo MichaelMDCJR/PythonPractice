@@ -20,7 +20,7 @@ def detect_sentiment():
 
     sentiment_dict = sent_analyzer.polarity_scores(sentence)
 
-    # Determine the intensity of string and put in in fields
+    # Determine the intensity of string and put it in fields
     neg_string = str(sentiment_dict['neg']*100) + "% Negative"
     negField.insert(10, neg_string)
 
