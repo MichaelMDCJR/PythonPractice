@@ -13,6 +13,32 @@ def clear_all():
 
 def detect_sentiment():
     # Get sentence
+    sentence = text_box.get("1.0", "end")
+
+    # Create a sentiment analyzer
+    sent_analyzer = SentimentIntensityAnalyzer()
+
+    sentiment_dict = sent_analyzer.polarity_scores(sentence)
+
+    # Determine the intensity of string and put in in fields
+    neg_string = str(sentiment_dict['neg']*100) + "% Negative"
+    negField.insert(10, neg_string)
+
+    pos_string = str(sentiment_dict['pos']*100) + "% Positive"
+    posField.insert(10, pos_string)
+
+    neut_string = str(sentiment_dict['neu']*100) + "% Neutral"
+    neutField.insert(10, neut_string)
+
+    # Decide if statement is positive, negative, or neutral
+    if sentiment_dict['compound'] >= 0.05:
+        string = "Positive"
+    elif sentiment_dict['compound'] <= -0.05:
+        string = "Negative"
+    else:
+        string = "Neutral"
+
+    overField.insert(10, string)
 
 
 if __name__ == "__main__":
